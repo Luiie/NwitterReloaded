@@ -3,7 +3,8 @@ import { auth, db, storage } from "../firebase";
 import { MyTweet } from "./timeline";
 import { styled } from "styled-components";
 import { deleteObject, ref } from "firebase/storage";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StateContext } from './visitor-btn';
 
 const Wrapper = styled.div`
   display: grid;
@@ -80,6 +81,8 @@ export default function Tweet({tweet, username, photo, userId, id}:MyTweet){
   const user = auth.currentUser;
   const [fixedTweet, SetFixedTweet] = useState(tweet);
   const [edited, SetEdited] = useState(false);
+  const {isVisitor, setIsVisitor} = useContext(StateContext);
+
   const onDelete =async () => {
     const ok = confirm("Are you sure?");
     if(!ok || user?.uid !== userId) return;
@@ -125,9 +128,9 @@ export default function Tweet({tweet, username, photo, userId, id}:MyTweet){
           {edited ? 
               <TextArea value={fixedTweet} onChange={onChange} placeholder="Edit your tweet!"/>
            : <Payload>{fixedTweet}</Payload>}
-          {user?.uid === userId ? <DeleteButton onClick={onDelete}>Delete</DeleteButton> : null}
+          {(!isVisitor) && user?.uid === userId ? <DeleteButton onClick={onDelete}>Delete</DeleteButton> : null}
           <>{` `}</>
-          {user?.uid === userId && !edited ? <EditButton onClick={onEdit}>Edit</EditButton> : null}
+          {(!isVisitor) && user?.uid === userId && !edited ? <EditButton onClick={onEdit}>Edit</EditButton> : null}
           <></>
           {edited ? <EditButton onClick={onEdit}>Done</EditButton> : null}
       </Column>

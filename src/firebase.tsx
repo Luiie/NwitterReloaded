@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCPrX9LRi38c9uoBmq6lkpmIbihLQ-ORw4",
+  apiKey: "AIzaSyBNxI3EY6fil8NKfivVQXE_jVm_Habmf6o",
   authDomain: "nwitter-reloaded-499f2.firebaseapp.com",
   projectId: "nwitter-reloaded-499f2",
   storageBucket: "nwitter-reloaded-499f2.appspot.com",

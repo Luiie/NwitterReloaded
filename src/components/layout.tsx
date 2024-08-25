@@ -1,6 +1,8 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import { useContext } from "react";
+import { StateContext } from './visitor-btn';
 
 const Wrapper = styled.div`
   display: grid;
@@ -36,6 +38,7 @@ const MenuItem = styled.div`
     }
   }
 `;
+const {isVisitor, setIsVisitor} = useContext(StateContext);
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -43,8 +46,10 @@ export default function Layout() {
     const ok = confirm("Log Out?");
     if(ok){
       await auth.signOut();
+      setIsVisitor(false);
       navigate("/login");
     }
+
   };
   return (
     <Wrapper>

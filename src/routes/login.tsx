@@ -5,6 +5,7 @@ import { FirebaseError } from "firebase/app";
 import { auth } from "../firebase";
 import { Wrapper, Title, Form, Input, Error, Switcher } from "../components/auth-components";
 import GithubButton from "../components/github-btn";
+import VisitorButton from "../components/visitor-btn";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ export default function LogIn() {
         <Link to="/create-account">Create One</Link>
       </Switcher>
       <GithubButton />
+      <VisitorButton />
     </Wrapper>
     );
 }
